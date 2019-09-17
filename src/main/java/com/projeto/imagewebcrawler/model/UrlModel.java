@@ -1,28 +1,27 @@
 package com.projeto.imagewebcrawler.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class UrlModel implements Serializable {
 	private static final long serialVersionUID = -4850586552061631628L;
 	
-	private String url;
+	private List <String>url;
 
 	public UrlModel() {
 		
 	}
 	
-	public UrlModel(String url) {
-		super();
-		this.url = url;
-	}
-
-	public String getUrl() {
+	
+	public List<String> getUrl() {
 		return url;
 	}
 
-	public void setUrl(String url) {
+
+	public void setUrl(List<String> url) {
 		this.url = url;
 	}
+
 
 	@Override
 	public int hashCode() {

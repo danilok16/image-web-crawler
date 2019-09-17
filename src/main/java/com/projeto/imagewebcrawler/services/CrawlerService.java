@@ -14,9 +14,9 @@ public class CrawlerService {
 	
 	UrlBuffer urlBuffer = UrlBuffer.getInstance();
 
-	public void imageCrawler(List<UrlModel> listUrl) {
-		for(UrlModel obj:listUrl) {
-			new Thread(new ImageUrlThread(obj.getUrl())).start();
+	public void imageCrawler(UrlModel listUrl) {
+		for(String obj:listUrl.getUrl()) {
+			new Thread(new ImageUrlThread(obj)).start();
 			urlBuffer.incrementar();
 		}
 		
@@ -24,6 +24,7 @@ public class CrawlerService {
 			if (!UrlBuffer.getUrl().isEmpty()) {
 				new Thread(new ImageDownloadThread()).start();
 			}
+			
 		}
 	}
 

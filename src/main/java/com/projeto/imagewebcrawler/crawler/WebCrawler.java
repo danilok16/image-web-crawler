@@ -21,37 +21,25 @@ public class WebCrawler {
 			Elements linksOnPage = document.getElementsByTag("img");
 			for (Element page : linksOnPage) {
 				src = page.absUrl("src");
-				if(isURL(src)) {
-					UrlBuffer.getInstance().insertUrl(src);
-				}
+				UrlBuffer.getInstance().insertUrl(src);
 			}
-			urlBuffer.decrementar();
 		} catch (IOException e) {
-			System.err.println("For '" + URL + "': " + e.getMessage());
+		} finally {
+			urlBuffer.decrementar();
 		}
 	}
 
-	@SuppressWarnings("static-access")
 	public void downloadImage() {
 		String imageUrl = null;
 		UrlBuffer urlBuffer = UrlBuffer.getInstance();
-		if (!urlBuffer.getUrl().isEmpty()) {
-			imageUrl = urlBuffer.getUrlToDownload();
+		if ((imageUrl = urlBuffer.getUrlToDownload()) != null) {
 			try {
 				InputStream inputStream = new URL(imageUrl).openStream();
 				Files.copy(inputStream, Paths.get("C:\\Users\\dkaus\\Downloads\\down\\" + Math.random() + ".png"));
 				inputStream.close();
 			} catch (IOException e) {
-				e.printStackTrace();
 			}
 		}
 	}
-	
-	public boolean isURL(String url) {
-		  try {
-		     (new java.net.URL(url)).openStream().close();
-		     return true;
-		  } catch (Exception ex) { }
-		  return false;
-		}
+
 }

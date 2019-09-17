@@ -18,8 +18,8 @@ public class WebCrawlerResoucer {
 	@Autowired
 	private CrawlerService crawlerService;
 	
-	@RequestMapping(method = RequestMethod.POST)
-	public void imageCrawler(@RequestBody List<UrlModel> listUrl) {
+	@RequestMapping(method = RequestMethod.GET)
+	public void imageCrawler(@RequestBody UrlModel listUrl) {
 		crawlerService.imageCrawler(listUrl);
 	}
 }
